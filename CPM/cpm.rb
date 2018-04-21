@@ -142,8 +142,6 @@ def create_timetable(graph)
     end
   end
 
-  # timetable = timetable.transpose
-
   return timetable, max_end
 end
 
@@ -289,6 +287,7 @@ else
   print "\n"
 end
 
+# rearrange graph with info from sorted array
 topological_graph = topological_change(input_graph, sort_index)
 # mark source nodes with 0's
 label_source_nodes(topological_graph)

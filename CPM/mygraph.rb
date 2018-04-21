@@ -45,9 +45,6 @@ def topological_sort(original_graph)
       remove_dependent(graph.nodes, graph.nodes[i].index)
       # and remove node from graph
       graph.nodes[i] = nil
-      # print sorted_arr
-      # print "\n"
-      # start again
       i = 0
     else
       # next node
@@ -57,7 +54,6 @@ def topological_sort(original_graph)
 
   # not sure if != or just <
   return 1 if sorted_arr.length != graph.nodes.length
-  # it's not necessary to use return statement here
   return sorted_arr
 end
 
