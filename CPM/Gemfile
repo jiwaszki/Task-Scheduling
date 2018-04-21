@@ -1,0 +1,4 @@
+gem 'gruff'
+gem 'rgl'
+gem 'rmagick'
+# gem 'ruby2d'
