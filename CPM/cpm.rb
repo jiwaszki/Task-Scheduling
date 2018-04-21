@@ -179,15 +179,15 @@ def draw_timetable(timetable, table_end, name_of_file, fixed_size = 100)
       if timetable[i][j] == "x"
         square.fill_opacity(20)
         square.stroke_width(fixed_size / 20)
-        square.stroke('black')
+        square.stroke('#292925')
         square.fill('#56574F')
         square.rectangle(s_x, s_y, s_x + fixed_size, s_y + fixed_size)
         square.draw(imgl)
       else
         square.fill_opacity(100)
         square.stroke_width(fixed_size / 20)
-        square.stroke('black')
-        square.fill('grey')
+        square.stroke('#292925')
+        square.fill('#BBBDAC')
         square.rectangle(s_x, s_y, s_x + fixed_size, s_y + fixed_size)
         square.draw(imgl)
 
@@ -196,7 +196,7 @@ def draw_timetable(timetable, table_end, name_of_file, fixed_size = 100)
         txt.font_weight(Magick::NormalWeight)
         txt.font_style(Magick::NormalStyle)
         txt.pointsize(fixed_size / 3)
-        txt.fill('red')
+        txt.fill('#1F1F57')
         txt.stroke('transparent')
         txt.text(s_x + fixed_size / 8, s_y + fixed_size / 2, "Z" + timetable[i][j])
 
@@ -210,10 +210,9 @@ def draw_timetable(timetable, table_end, name_of_file, fixed_size = 100)
   t_y = (timetable.length + 1) * fixed_size - fixed_size / 2
 
   timeline = Magick::Draw.new
-  timeline.stroke('black').stroke_width(fixed_size / 8)
 
-  timeline.fill('black')
-  timeline.stroke('black').stroke_width(fixed_size / 10)
+  timeline.fill('#292925')
+  timeline.stroke('#292925').stroke_width(fixed_size / 10)
   timeline.line(0, t_y, t_x, t_y)
   # make dots
   (0..table_end).each do |k|
@@ -225,7 +224,7 @@ def draw_timetable(timetable, table_end, name_of_file, fixed_size = 100)
     dot.font_weight(Magick::NormalWeight)
     dot.font_style(Magick::NormalStyle)
     dot.pointsize(fixed_size / 3)
-    dot.fill('black')
+    dot.fill('#292925')
     dot.stroke('transparent')
     dot.text(k * fixed_size, t_y + fixed_size / 2, k.to_s)
 
@@ -233,7 +232,7 @@ def draw_timetable(timetable, table_end, name_of_file, fixed_size = 100)
   end
   timeline.draw(imgl)
 
-  imgl.border!(5,5, 'lightcyan2')
+  imgl.border!(5,5, '#292925')
   imgl.write(name_of_file + ".gif")
 end
 
@@ -253,7 +252,8 @@ def print_timetable(timetable, table_end)
 end
 
 if ARGV[0].nil?
-  name_of_file = 'test'
+  puts "Enter the name of file!"
+  exit
 else
   name_of_file = ARGV[0]
 end
