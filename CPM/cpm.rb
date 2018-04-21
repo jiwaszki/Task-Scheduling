@@ -302,6 +302,8 @@ topological_graph.create_graph_jpg('./output/' + name_of_file + '_graph')
 
 # method marks nodes as used
 timetable, table_end = create_timetable(topological_graph)
+# C*max is the end of timetable
+puts "C*max is equal to " + table_end.to_s
+# print_timetable(timetable, table_end)
 draw_timetable(timetable, table_end,
                './output/' + name_of_file + '_timetable', 100)
-# print_timetable(timetable, table_end)
