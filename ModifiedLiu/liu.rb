@@ -153,6 +153,7 @@ def modified_liu_algorithm(graph)
     end
     # increase "time" count
     unit_of_time += 1
+    break if unit_of_time == 30
   end
   return timetable
 end

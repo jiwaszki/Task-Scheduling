@@ -101,7 +101,7 @@ class MyGraph
   # pretty prints graph data
   def print_graph_data(timetable_length)
     puts "-------------------------------------".light_yellow
-    puts "------------ Graph data -------------".light_yellow
+    puts "------------ Graph data -------------".light_yellow.on_red
     @nodes.each do |node|
       puts "-------------------------------------".light_yellow
       print ("task: " + node.task.to_s).light_red
@@ -116,8 +116,8 @@ class MyGraph
       print " color: " + node.color
       puts "\n-------------------------------------".light_yellow
     end
-    puts "## More graph/tasks data:".light_yellow
-    puts "## time  = #{timetable_length}".light_cyan
+    puts "## More graph/tasks data:".light_yellow.on_red
+    puts "## time  = #{timetable_length}".light_cyan.blink
     puts "## Lmax* = #{find_max_lateness_in_graph_data()}".light_cyan
     puts "## For timetable check output folder.".green
     puts "## File is named after argument file.".green
