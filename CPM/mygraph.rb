@@ -1,6 +1,5 @@
 require 'rgl/adjacency'
 require 'rgl/dot'
-require 'rgl/topsort'
 
 # remove given index from depends array
 def remove_dependent(nodes, remove_index)

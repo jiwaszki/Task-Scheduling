@@ -297,7 +297,7 @@ label_next_nodes(topological_graph)
 topological_graph.create_graph_jpg('./output/' + name_of_file + '_graph')
 
 # no need for this in project
-# topological_graph.create_depending_jpg(name_of_file + '_depending')
+topological_graph.create_depending_jpg('./output/' + name_of_file + '_depending')
 
 # method marks nodes as used
 timetable, table_end = create_timetable(topological_graph)
