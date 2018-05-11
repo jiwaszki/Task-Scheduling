@@ -1,7 +1,9 @@
+require 'colorize'
+
 # node class representing single node-task in graph
 class Node
   attr_accessor :task, :proc_time, :due_time, :rev_time, :prev_tasks,
-                :next_tasks, :mod_time, :color, :lateness
+                :next_tasks, :mod_time, :color, :lateness, :pass_time
 
   # init new node
   def initialize(task, proc_t, due_t, rev_t, prev_t, next_t)
@@ -19,6 +21,7 @@ class Node
                                     # r(ed)   => outside of system
                                     # w(hite) => finished
     @lateness   = nil             # lateness of task
+    @pass_time  = 0               # time that passed, task has been run for
   end
 end
 
@@ -29,6 +32,15 @@ class MyGraph
   # initialize with empty array of nodes
   def initialize
     @nodes = []
+  end
+
+  # search for node with given task index and return it
+  def node_with_task(task_index)
+    @nodes.each do |node|
+      return node if node.task == task_index
+    end
+    raise ArgumentError, "Node with task number #{task_index} does not exists!" \
+      if arr.empty?
   end
 
   # loading graph from file
@@ -76,23 +88,39 @@ class MyGraph
     end
   end
 
-  # pretty prints graph data
-  def print_graph_data
-    puts "-------------------------------------"
-    puts "------------ Graph data -------------"
+  # find max task lateness from graph data
+  def find_max_lateness_in_graph_data()
+    # L_max cannot be less than 0
+    max_val = 0
     @nodes.each do |node|
-      puts "-------------------------------------"
-      print "task: " + node.task.to_s
+      max_val = node.lateness if node.lateness > max_val
+    end
+    return max_val
+  end
+
+  # pretty prints graph data
+  def print_graph_data(timetable_length)
+    puts "-------------------------------------".light_yellow
+    puts "------------ Graph data -------------".light_yellow
+    @nodes.each do |node|
+      puts "-------------------------------------".light_yellow
+      print ("task: " + node.task.to_s).light_red
       print " p: " + node.proc_time.to_s + " d: " + node.due_time.to_s + " r: " +
            node.rev_time.to_s + "\n"
       print "prev: "
       print node.prev_tasks
       print " next: "
       print node.next_tasks
-      print "\nnew d: " + node.mod_time.to_s
-      print " L: " + node.lateness.to_s
+      print ("\nnew d: " + node.mod_time.to_s).light_cyan
+      print (" L: " + node.lateness.to_s).light_cyan
       print " color: " + node.color
-      puts "\n-------------------------------------"
+      puts "\n-------------------------------------".light_yellow
     end
+    puts "## More graph/tasks data:".light_yellow
+    puts "## time  = #{timetable_length}".light_cyan
+    puts "## Lmax* = #{find_max_lateness_in_graph_data()}".light_cyan
+    puts "## For timetable check output folder.".green
+    puts "## File is named after argument file.".green
+    puts "-------------------------------------".light_yellow
   end
 end
