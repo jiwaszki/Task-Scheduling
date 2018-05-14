@@ -1,4 +1,6 @@
 require 'colorize'
+require 'rgl/adjacency'
+require 'rgl/dot'
 
 # node class representing single node-task in graph
 class Node
@@ -122,5 +124,33 @@ class MyGraph
     puts "## For timetable check output folder.".green
     puts "## File is named after argument file.".green
     puts "-------------------------------------".light_yellow
+  end
+
+  def pretty_name(node)
+    new_name = "\nZ" + node.task.to_s
+  end
+
+  def create_graph_jpg(filename)
+    visualisation = RGL::DirectedAdjacencyGraph[]
+
+    @nodes.each do |node|
+      node_name = pretty_name(node)
+      visualisation.add_vertex(node_name)
+      if node.prev_tasks != nil
+        node.prev_tasks.each do |dependent|
+          @nodes.each do |find|
+            if dependent == find.task
+              dependent_name = pretty_name(find)
+              visualisation.add_edge(dependent_name, node_name)
+              break
+            end
+          end
+        end
+      end
+    end
+
+    visualisation.write_to_graphic_file('jpg', filename)
+    # delete .dot file
+    system("rm -f " + filename + ".dot")
   end
 end

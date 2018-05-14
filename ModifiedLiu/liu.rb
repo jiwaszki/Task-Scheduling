@@ -172,4 +172,5 @@ calculate_modified_due_times(input_graph)
 generated_timetable = modified_liu_algorithm(input_graph)
 
 input_graph.print_graph_data(generated_timetable.length)
+input_graph.create_graph_jpg("output/" + ARGV[0])
 TimetableDrawer.draw_timetable(generated_timetable, "output/"+ ARGV[0])
