@@ -16,8 +16,9 @@ class Node
     @next_tasks = next_t          # array of tasks right after
     # data modified in liu algorithm
     @color      = 'r'             # color of task, describes the state of it
-                                    # g(reen) => available task
-                                    # r(ed)   => task finished
+                                    # g(reen) => task is available in system
+                                    # r(ed)   => outside of system
+                                    # w(hite) => finished
     @level      = 0               # level of task (distance from root)
   end
 end
