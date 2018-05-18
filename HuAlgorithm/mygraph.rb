@@ -98,6 +98,7 @@ class MyGraph
       print node.prev_tasks
       print " next: "
       print node.next_tasks
+      print ("\nlevel: " + node.level.to_s).light_cyan
       puts "\n-------------------------------------".light_yellow
     end
     puts "## More graph/tasks data:".light_yellow.on_red
