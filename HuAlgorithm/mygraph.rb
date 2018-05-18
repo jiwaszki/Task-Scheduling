@@ -8,7 +8,7 @@ class Node
                 :level
 
   # init new node
-  def initialize(task, proc_t, due_t, rev_t, prev_t, next_t)
+  def initialize(task, proc_t, prev_t, next_t)
     # data that is readed from file
     @task       = task            # task index/number
     @proc_time  = proc_t          # time of task execution/processing
@@ -19,7 +19,6 @@ class Node
                                     # g(reen) => available task
                                     # r(ed)   => task finished
     @level      = 0               # level of task (distance from root)
-    @
   end
 end
 
@@ -61,17 +60,17 @@ class MyGraph
         if proc_t.length != 2 || proc_t[0] != 'p' || proc_t[1] != '1'
       proc_t = proc_t[1].to_i
 
-      prev_t = line[4].split(':')
+      prev_t = line[2].split(':')
       raise ArgumentError, 'Wrong previous tasks data!' \
         if prev_t[0] != 'prev'
       prev_t = prev_t.drop(1).map(&:to_i)
 
-      next_t = line[5].split(':')
+      next_t = line[3].split(':')
       raise ArgumentError, 'Wrong next tasks data!' \
         if next_t[0] != 'next'
       next_t = next_t.drop(1).map(&:to_i)
 
-      created_node = Node.new(task, proc_t, due_t, rev_t, prev_t, next_t)
+      created_node = Node.new(task, proc_t, prev_t, next_t)
       @nodes << created_node
     end
   end
@@ -94,11 +93,11 @@ class MyGraph
       puts "-------------------------------------".light_yellow
       print ("task: " + node.task.to_s).light_red
       print " p: " + node.proc_time.to_s
-      print "prev: "
+      print " color: " + node.color
+      print "\nprev: "
       print node.prev_tasks
       print " next: "
       print node.next_tasks
-      print " color: " + node.color
       puts "\n-------------------------------------".light_yellow
     end
     puts "## More graph/tasks data:".light_yellow.on_red

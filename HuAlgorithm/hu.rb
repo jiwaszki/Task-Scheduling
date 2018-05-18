@@ -31,3 +31,5 @@ end
 
 input_graph = MyGraph.new
 input_graph.load_from_file(name_of_file)
+
+input_graph.print_graph_data()
