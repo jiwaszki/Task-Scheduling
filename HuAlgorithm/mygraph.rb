@@ -87,7 +87,7 @@ class MyGraph
   end
 
   # pretty prints graph data
-  def print_graph_data() # add something to get data from!
+  def print_graph_data(c_max) # add something to get data from!
     puts "-------------------------------------".light_yellow
     puts "------------ Graph data -------------".light_yellow.on_red
     @nodes.each do |node|
@@ -103,14 +103,14 @@ class MyGraph
       puts "\n-------------------------------------".light_yellow
     end
     puts "## More graph/tasks data:".light_yellow.on_red
-    puts "## Cmax = #{}".light_cyan
+    puts "## Cmax = #{c_max}".light_cyan
     puts "## For timetable check output folder.".green
     puts "## File is named after argument file.".green
     puts "-------------------------------------".light_yellow
   end
 
   def pretty_name(node)
-    new_name = "\nZ" + node.task.to_s
+    new_name = "\nZ" + node.task.to_s + "\nlevel: " + node.level.to_s
   end
 
   def create_graph_jpg(filename)
