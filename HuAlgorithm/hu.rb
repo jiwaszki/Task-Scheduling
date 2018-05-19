@@ -87,6 +87,11 @@ def find_all_possible_tasks(priority_list, graph)
   return priority_list
 end
 
+# sorts priority list by not ascending order of levels
+def sort_by_not_ascending_order(priority_list)
+  return priority_list.sort { |a,b| b.level <=> a.level }
+end
+
 # run task and modify variables in graph structure
 def run_task(given_task, graph)
   graph.nodes.each do |node|
@@ -153,6 +158,8 @@ def hu_algorithm(graph, number_of_machines)
     mark_in_system_tasks(graph)
     # look for new priority list
     priority_list = find_all_possible_tasks(priority_list, graph)
+    # sort the list by not ascending order of levels
+    priority_list = sort_by_not_ascending_order(priority_list)
     # print step of algorithm
     print_step_of_algorithm(priority_list, unit_of_time)
     # skip the step if priority list is empty
