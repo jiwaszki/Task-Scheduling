@@ -201,7 +201,7 @@ def hu_algorithm(graph, number_of_machines)
     # increase "time" count
     unit_of_time += 1
   end
-  puts "error" if !priority_list.empty?
+  puts "Something went wrong!" if !priority_list.empty?
   return timetable
 end
 
