@@ -2,20 +2,21 @@ require 'colorize'
 
 # task class representing single task
 class Task
-  attr_accessor :index, :proc_1, :proc_2, :proc_3
+  attr_accessor :index, :proc_1, :proc_2, :proc_3, :proc_mod
 
   # init new node
   def initialize(index, m1, m2, m3)
     # data that is read from file
-    @index  = index   # task index/number
-    @proc_1 = m1      # processing time on first machine
-    @proc_2 = m2      # processing time on second machine
-    @proc_3 = m3      # processing time on third machine
+    @index    = index   # task index/number
+    @proc_1   = m1      # processing time on first machine
+    @proc_2   = m2      # processing time on second machine
+    @proc_3   = m3      # processing time on third machine
     # data modified in Johnson's algorithm
-    #@color  = 'r'     # color of task, describes the state of it
-                        # g(reen) => task is available in system
-                        # r(ed)   => outside of system
-                        # w(hite) => finished
+    @proc_mod = nil     # modified time calculated in algorithm
+    # @color  = 'r'       # color of task, describes the state of it
+                            # g(reen) => task is available in system
+                            # r(ed)   => outside of system
+                            # w(hite) => finished
   end
 end
 
@@ -71,8 +72,21 @@ class MyData
     end
   end
 
+  # pretty prints N table
+  def print_n_array(n_arr)
+    print "## tasks: ".light_red
+    n_arr.each do |task|
+      print task.index.to_s.light_red + " "
+    end
+    print "\n## mod_t: "
+    n_arr.each do |task|
+      print task.proc_mod.to_s + " "
+    end
+    print "\n"
+  end
+
   # pretty prints data
-  def print_data()
+  def print_data(n_one, n_two, c_max)
     puts "-------------------------------------".light_yellow
     puts "------------ Graph data -------------".light_yellow.on_red
     @tasks.each do |task|
@@ -84,7 +98,11 @@ class MyData
       puts "\n-------------------------------------".light_yellow
     end
     puts "## More graph/tasks data:".light_yellow.on_red
-    # print N1 and N2 with task and new_time!
+    puts "## Cmax = #{c_max}".light_cyan
+    puts "## N1:".light_cyan
+    print_n_array(n_one)
+    puts "## N2:".light_cyan
+    print_n_array(n_two)
     puts "## For timetable check output folder.".green
     puts "## File is named after argument file.".green
     puts "-------------------------------------".light_yellow

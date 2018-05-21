@@ -27,7 +27,7 @@ module TimetableDrawer
 
         square = Magick::Draw.new
 
-        if timetable[i][j] == 0
+        if timetable[i][j] == 0 || timetable[i][j] == nil
           square.fill_opacity(20)
           square.stroke_width(fixed_size / 20)
           square.stroke('#292925')
