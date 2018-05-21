@@ -9,7 +9,7 @@ class Node
 
   # init new node
   def initialize(task, proc_t, due_t, rev_t, prev_t, next_t)
-    # data that is readed from file
+    # data that is read from file
     @task       = task            # task index/number
     @proc_time  = proc_t          # time of task execution/processing
     @due_time   = due_t           # time of due task execution

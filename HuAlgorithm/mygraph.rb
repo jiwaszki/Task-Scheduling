@@ -9,7 +9,7 @@ class Node
 
   # init new node
   def initialize(task, proc_t, prev_t, next_t)
-    # data that is readed from file
+    # data that is read from file
     @task       = task            # task index/number
     @proc_time  = proc_t          # time of task execution/processing
     @prev_tasks = prev_t          # array of tasks right before
@@ -76,18 +76,8 @@ class MyGraph
     end
   end
 
-  # find max task lateness from graph data
-  def find_max_lateness_in_graph_data()
-    # L_max cannot be less than 0
-    max_val = 0
-    @nodes.each do |node|
-      max_val = node.lateness if node.lateness > max_val
-    end
-    return max_val
-  end
-
   # pretty prints graph data
-  def print_graph_data(c_max) # add something to get data from!
+  def print_graph_data(c_max)
     puts "-------------------------------------".light_yellow
     puts "------------ Graph data -------------".light_yellow.on_red
     @nodes.each do |node|
