@@ -112,7 +112,7 @@ def run_task(given_task, graph)
   return given_task.task
 end
 
-# pretty print on step of algorithm
+# pretty print one step of algorithm
 def print_step_of_algorithm(priority_list, unit_of_time)
   print "List " + unit_of_time.to_s + ": ("
   i = 0
