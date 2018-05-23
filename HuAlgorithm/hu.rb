@@ -9,9 +9,6 @@ require './cycle.rb'
 ###     data, please check your input file.     ###
 ###################################################
 
-# sprawdzić cykle
-# + in-tree
-
 # add root node to graph and connect it to nodes with nil nexts
 def add_root_node(graph)
   # initialize root node with -1 index of task and processing time
