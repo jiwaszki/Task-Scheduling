@@ -5,7 +5,7 @@ require 'rgl/dot'
 # node class representing single node-task in graph
 class Node
   attr_accessor :task, :proc_time, :prev_tasks, :next_tasks, :color,
-                :level
+                :level, :count
 
   # init new node
   def initialize(task, proc_t, prev_t, next_t)
@@ -14,13 +14,28 @@ class Node
     @proc_time  = proc_t          # time of task execution/processing
     @prev_tasks = prev_t          # array of tasks right before
     @next_tasks = next_t          # array of tasks right after
-    # data modified in liu algorithm
+    # data modified in hu algorithm
     @color      = 'r'             # color of task, describes the state of it
-                                    # g(reen) => task is available in system
+                                    # g(reen) => exists in system
                                     # r(ed)   => outside of system
                                     # w(hite) => finished
     @level      = 0               # level of task (distance from root)
+    @count      = 0               # helper in in-tree checking
   end
+end
+
+# copy values of nodes
+def copy_nodes(graph)
+  new_nodes = []
+  graph.nodes.each do |node|
+    # get old values
+    copy_node = Node.new(node.task, node.proc_time, \
+                         node.prev_tasks, node.next_tasks)
+    # maybe copy color and level too
+    new_nodes << copy_node
+  end
+  # return copied values
+  return new_nodes
 end
 
 # mygraph class representing input in form of graph
@@ -38,7 +53,20 @@ class MyGraph
       return node if node.task == task_index
     end
     raise ArgumentError, "Node with task number #{task_index} does not exists!" \
-      if arr.empty?
+  end
+
+  # add count in in-tree checking
+  def add_count_to_task(task_index)
+    @nodes.each do |node|
+      if node.task == task_index
+        node.count += 1
+        # return duplicate "error"
+        return 1 if node.count > 1
+        # else return 0
+        return 0
+      end
+    end
+    raise ArgumentError, "Node with task number #{task_index} does not exists!" \
   end
 
   # loading graph from file

@@ -1,5 +1,6 @@
 require './mygraph.rb'
 require './timetabledrawer.rb'
+require './cycle.rb'
 
 ###################################################
 ###                IMPORTANT!!!                 ###
@@ -8,6 +9,9 @@ require './timetabledrawer.rb'
 ###     data, please check your input file.     ###
 ###################################################
 
+# sprawdzić cykle
+# + in-tree
+
 # add root node to graph and connect it to nodes with nil nexts
 def add_root_node(graph)
   # initialize root node with -1 index of task and processing time
@@ -15,7 +19,12 @@ def add_root_node(graph)
   root_node = Node.new(-1, 0, [], [0])
   # search in graph for tasks that "goes out"
   graph.nodes.each do |node|
-    root_node.prev_tasks << node.task if node.next_tasks == [0]
+    if node.next_tasks == [0]
+      # add task to root node connection
+      root_node.prev_tasks << node.task
+      # and add root node to task connection
+      node.next_tasks = [-1]
+    end
   end
   # push the root to graph nodes
   graph.nodes << root_node
@@ -229,6 +238,17 @@ input_graph.load_from_file(name_of_file)
 
 add_root_node(input_graph)
 calculate_nodes_level(input_graph)
+
+# make sure there is no cycle in input graph
+if CycleFinder.has_cycle_topological_sort(input_graph) == 1
+  puts "There is cycle in graph! Exiting."
+  exit
+end
+
+if CycleFinder.check_if_in_tree(input_graph) == 1
+  puts "Invalid in-tree representation in graph! Exiting."
+  exit
+end
 
 generated_timetable = hu_algorithm(input_graph, number_of_machines)
 c_max = find_cmax_in_timetable(generated_timetable)

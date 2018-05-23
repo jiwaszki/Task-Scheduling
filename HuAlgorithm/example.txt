@@ -1,0 +1,4 @@
+n:1 p:1 prev:nil next:2:3
+n:2 p:1 prev:1 next:4
+n:3 p:1 prev:1 next:4
+n:4 p:1 prev:2:3 next:nil
